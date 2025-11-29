@@ -273,6 +273,38 @@ body {
     fill: var(--dark-blue); 
 }
 
+.depto1-2 {
+  display: flex;
+  justify-content: center; 
+  gap: 12px;               
+  flex-wrap: wrap;        
+  margin: 1.5rem 0;
+}
+
+.depto1-2 .cta-button {
+  flex: 1 1 120px;       
+  max-width: 200px;      
+  padding: 10px 20px;
+  font-size: 1rem;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  color: white;
+  background-color: #0c3c78;
+  border: 2px solid #0c3c78;
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+}
+
+.depto1-2 .cta-button:hover {
+  background-color: #e4d5b7;
+  color: #0c3c78;
+}
+
+
+
+  
 
 /* --- GALERÍA  --- */
 .page-content {
@@ -402,6 +434,7 @@ body {
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 0;
 }
 
 .image-box.gold-border {
@@ -581,13 +614,35 @@ h1 {
 @media (max-width: 768px) {
     
     .section-padding {
-        padding: 40px 5%; /* Menos padding en móvil */
+        padding: 40px 5%; 
     }
 
     .section-title {
         font-size: 2rem;
         margin-bottom: 25px;
     }
+    .image-box {
+    height: 245px;
+    max-width: 100%;
+  }
+  .content-2-col.reverse-col {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+
+.content-2-col.reverse-col {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-direction: row-reverse;
+  flex-wrap: nowrap;
+}
+
+.content-2-col.reverse-col > div {
+  flex: 1;
+  min-width: 0;
+}
 
    
     .hero-content h1 {
@@ -654,4 +709,15 @@ h1 {
         flex-direction: column; 
         gap: 20px;
     }
+    .depto1-2 {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .depto1-2 .cta-button {
+    max-width: 100%;
+    flex-basis: 100%;
+  }
+
 }
+
