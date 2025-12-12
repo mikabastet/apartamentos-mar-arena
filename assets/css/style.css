@@ -14,6 +14,7 @@
 * {
     box-sizing: border-box;
     margin: 0;
+    padding: 0;
     
 }
 
@@ -22,7 +23,9 @@ body {
     color: var(--text-primary);
     background-color: var(--sand-beige);
     line-height: 1.6;
+    margin: 0;
     padding: 0;
+    
 }
 
 /* Tipografías específicas */
@@ -30,7 +33,49 @@ body {
     font-family: 'Playfair Display', 'Cormorant Garamond', serif;
     
 }
+/*nav menu principal*/
 
+.top-nav {
+    position: absolute; /* Para que flote sobre la imagen del hero */
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 15px 30px;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente oscuro */
+    z-index: 20; /* Asegura que esté por encima de la capa de fondo del hero */
+    display: flex;
+    justify-content: center; /
+}
+
+
+.top-nav .nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 25px; 
+    transition: color 0.5s;
+}
+
+.top-nav .nav-links a:hover {
+    color: var(--soft-gold);
+}
+
+/* Estilo especial para el enlace de WhatsApp */
+.nav-link-whatsapp {
+    font-weight: bold !important;
+    color: #25d366 !important; /* Color verde de WhatsApp para destacarlo */
+}
+
+/* Ajuste al footer para centrar el copyright */
+.footer-content.centered-copyright {
+    display: flex;
+    justify-content: center; /* Centra la sección Legal */
+    max-width: 100%;
+}
+
+.footer-content.centered-copyright .footer-section {
+    text-align: center;
+}
 /* Utilidades y Secciones */
 .section-padding {
     padding: 80px 30px; /* Más padding en escritorio */
@@ -58,6 +103,7 @@ body {
     justify-content: center;
     text-align: center;
     position: relative;
+    
 }
 
 .hero-section::before {
@@ -208,83 +254,55 @@ body {
 }
 
 /* --- FOOTER --- */
-.main-footer {
-    padding: 40px 30px;
-}
 
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 20px;
-}
 
-.footer-section h4 {
-    color: var(--soft-gold);
-    font-size: 1.3rem;
-    margin-bottom: 15px;
-}
 
-.footer-section a {
-    color: var(--foam-blue);
-    text-decoration: none;
-    transition: color 0.3s;
-}
 
-.footer-section a:hover {
-    color: var(--soft-gold);
-}
-
-.footer-section p, .footer-section li {
-    font-size: 0.95rem;
-    margin-bottom: 8px;
-    color: var(--white);
-}
-
-.footer-section ul {
-    list-style: none;
-}
 
 /* --- CHATBOT FLOTANTE (WhatsApp) --- */
 .whatsapp-float {
-    position: fixed;
+    /* Posición fija en la pantalla */
+    position: fixed; 
     width: 60px;
     height: 60px;
-    bottom: 30px;
-    right: 30px;
-    background-color: var(--foam-blue); 
-    color: var(--dark-blue);
-    border-radius: 50px;
+    /* Ubicación: Abajo a la derecha */
+    bottom: 40px; 
+    right: 40px;
+    /* Estilos */
+    background-color: #25d366; /* Color verde de WhatsApp */
+    color: #FFF;
+    border-radius: 50px; /* Para que sea circular */
     text-align: center;
     box-shadow: 2px 2px 3px #999;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s;
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
 }
+
+/* Estilo para la imagen dentro del botón */
+.whatsapp-float img {
+    width: 100%; /* La imagen ocupa todo el contenedor */
+    height: 100%;
+    /* Opcional: Centrar el ícono y darle un pequeño margen */
+    padding: 10px; 
+    box-sizing: border-box;
+}
+
 
 .whatsapp-float:hover {
-    background-color: var(--soft-gold);
+    background-color: #128C7E; /* Un verde diferente al pasar el ratón */
+    transform: scale(1.05); /* Ligeramente más grande */
 }
 
-.whatsapp-float svg {
-    fill: var(--dark-blue); 
-}
-
-.depto1-2 {
+body .depto1 {
   display: flex;
   justify-content: center; 
   gap: 12px;               
   flex-wrap: wrap;        
-  margin: 1.5rem 0;
+  margin: 1.5rem 0 4rem 0;
 }
 
-.depto1-2 .cta-button {
-  flex: 1 1 120px;       
-  max-width: 200px;      
+.botom {
+  flex: 1 1 120px; 
+  max-width: 200px; 
   padding: 10px 20px;
   font-size: 1rem;
   text-align: center;
@@ -292,13 +310,16 @@ body {
   text-decoration: none;
   font-weight: 600;
   color: white;
-  background-color: #0c3c78;
-  border: 2px solid #0c3c78;
+  background-color: var(--dark-blue); 
+  border: 2px solid var(--dark-blue); 
   transition: background-color 0.3s, color 0.3s;
   cursor: pointer;
+  margin-bottom: 40px; 
+  display: inline-block; 
 }
 
-.depto1-2 .cta-button:hover {
+
+.botom:hover {
   background-color: #e4d5b7;
   color: #0c3c78;
 }
@@ -609,11 +630,35 @@ h1 {
 }
 
 
+/* Ajuste al footer para centrar el copyright */
+.main-footer {
+    padding: 40px 30px;
+}
+
+
+
+.footer-section h4 {
+    color: var(--soft-gold);
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.footer-content.centered-copyright {
+    display: flex;
+    justify-content: center; /* Centra la sección Legal */
+    max-width: 100%;
+}
+
+.footer-content.centered-copyright .footer-section {
+    text-align: center;
+}
+
+
 /* MEDIA QUERIES - OPTIMIZACIÓN MÓVIL       */
 
 
 @media (max-width: 768px) {
-    body{padding: 5px;}
+    body{padding: 0;}
     
     .section-padding {
         padding: 40px 5%; 
@@ -676,15 +721,10 @@ h1 {
     }
     
     /* --- FOOTER --- */
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 25px;
+   .footer-content {
+        max-width: 100%; 
+        padding: 0 15px; 
     }
-    .footer-section h4 {
-        margin-bottom: 5px;
-    }
-    
    
     .gallery-grid {
         grid-template-columns: 1fr; 
