@@ -25,6 +25,7 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
+    text-align: center;
     
 }
 
@@ -261,35 +262,33 @@ body {
 
 /* --- CHATBOT FLOTANTE (WhatsApp) --- */
 .whatsapp-float {
-    /* Posición fija en la pantalla */
     position: fixed; 
     width: 60px;
     height: 60px;
-    /* Ubicación: Abajo a la derecha */
     bottom: 40px; 
     right: 40px;
     /* Estilos */
-    background-color: #25d366; /* Color verde de WhatsApp */
+    background-color: #25d366; 
     color: #FFF;
-    border-radius: 50px; /* Para que sea circular */
+    border-radius: 50px;
     text-align: center;
     box-shadow: 2px 2px 3px #999;
-    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    z-index: 1000; 
 }
 
-/* Estilo para la imagen dentro del botón */
+
 .whatsapp-float img {
-    width: 100%; /* La imagen ocupa todo el contenedor */
+    width: 100%; 
     height: 100%;
-    /* Opcional: Centrar el ícono y darle un pequeño margen */
+    
     padding: 10px; 
     box-sizing: border-box;
 }
 
 
 .whatsapp-float:hover {
-    background-color: #128C7E; /* Un verde diferente al pasar el ratón */
-    transform: scale(1.05); /* Ligeramente más grande */
+    background-color: #128C7E; 
+    transform: scale(1.05); 
 }
 
 body .depto1 {
@@ -316,7 +315,9 @@ body .depto1 {
   cursor: pointer;
   margin-bottom: 40px; 
   display: inline-block; 
+
 }
+
 
 
 .botom:hover {
@@ -571,13 +572,37 @@ body .depto1 {
     background-color: var(--foam-blue);
 }
 
-/* depto 1 y 2*/
-body {
-  font-family: 'Inter', sans-serif;
-  background: #f9f6f1;
-  padding: 10px;
-  text-align: center;
-  margin: 0;
+
+.depto1-2{
+    display: flex;
+    justify-content: center; 
+    gap: 30px; 
+    background-color: transparent; 
+    padding: 20px 0;
+    margin: 40px auto;
+    border-top: 3px solid var(--dark-blue);width: 80%;
+    border-bottom: 3px solid var(--dark-blue);width: 80%;
+    margin: 40px auto 40px auto;
+    padding-bottom: 60px; 
+}
+
+.depto1-2 .cta-buttom { 
+    
+    min-width: 180px; 
+    padding: 15px 30px; 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    background-color: var(--dark-blue); 
+    color: var(--white);
+    border: none;
+    border-radius: 8px; 
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.depto1-2 .cta-buttom:hover {
+    background-color: var(--soft-gold); 
+    color: var(--dark-blue);
 }
 
 h1 {
