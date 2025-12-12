@@ -33,7 +33,7 @@ body {
 
 /* Utilidades y Secciones */
 .section-padding {
-    padding: 80px 5%; /* Más padding en escritorio */
+    padding: 80px 30px; /* Más padding en escritorio */
 }
 
 .section-title {
@@ -209,7 +209,7 @@ body {
 
 /* --- FOOTER --- */
 .main-footer {
-    padding: 40px 5%;
+    padding: 40px 30px;
 }
 
 .footer-content {
@@ -500,7 +500,7 @@ body {
 .simple-nav {
     display: flex;
     justify-content: center;
-    padding: 15px 5%;
+    padding: 15px 30px;
     gap: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -554,7 +554,7 @@ body {
 body {
   font-family: 'Inter', sans-serif;
   background: #f9f6f1;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   margin: 0;
 }
@@ -613,7 +613,7 @@ h1 {
 
 
 @media (max-width: 768px) {
-    body{padding: 1%;}
+    body{padding: 5px;}
     
     .section-padding {
         padding: 40px 5%; 
