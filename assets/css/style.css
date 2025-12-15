@@ -571,9 +571,83 @@ body .depto1 {
 .gallery-nav .nav-link:hover {
     background-color: var(--foam-blue);
 }
+.depto-grid {
+    display: grid;
+    grid-template-columns: repeat(10,1fr); 
+    grid-template-rows: auto auto; 
+    row-gap: 50px;
+    column-gap: 20px;
+    max-width: 1200px; 
+    margin: 0 auto; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+}
 
+.grid-item.desc-box {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    text-align: left;
+}
 
-.depto1-2{
+.grid-item.desc-box h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--soft-gold); 
+}
+.serif{
+    text-align: center;
+}
+
+/* --- FILA 1 (MAR): 60% Carrusel | 40% Descripción --- */
+
+.depto-grid .grid-item:nth-child(1) {
+  
+    grid-column: 7 / 11; 
+    grid-row: 1 / 2;
+}
+
+.depto-grid .grid-item:nth-child(2) { 
+    grid-column: 1 / 7; 
+    grid-row: 1 / 2;
+}
+/* --- FILA 2 (ARENA): 40% Descripción | 60% Carrusel --- */
+
+.depto-grid .grid-item:nth-child(3) { 
+   
+    grid-column: 1 / 5; 
+    grid-row: 2 / 3;
+}
+
+.depto-grid .grid-item:nth-child(4) { 
+    grid-column: 5 / 11; 
+    grid-row: 2 / 3;
+}
+
+.carousel-box {
+    height: 400px; 
+    overflow: hidden; 
+}
+
+.swiper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+.swiper-button-prev,
+.swiper-button-next {
+    color: var(--white) !important; 
+    z-index: 10;
+    font-size: 20px !important; 
+}
+
+/*.depto1-2{
     display: flex;
     justify-content: center; 
     gap: 30px; 
@@ -608,7 +682,7 @@ body .depto1 {
 h1 {
   color: #0c3c78;
   margin-bottom: 1rem;
-}
+}*/
 
 .swiper {
   width: 100%;
@@ -776,15 +850,19 @@ h1 {
         flex-direction: column; 
         gap: 20px;
     }
-    .depto1-2 {
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .depto1-2 .cta-button {
-    max-width: 100%;
-    flex-basis: 100%;
-  }
 
+    .depto-grid {
+        grid-template-columns: 1fr; /* Una sola columna al 100% */
+        column-gap: 0;
+        grid-template-rows: auto;
+        box-shadow: none;
+    }
+    .depto-grid .grid-item:nth-child(1),
+    .depto-grid .grid-item:nth-child(2),
+    .depto-grid .grid-item:nth-child(3),
+    .depto-grid .grid-item:nth-child(4) {
+        grid-column: auto; 
+        grid-row: auto;    
+    }
 }
 

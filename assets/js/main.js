@@ -37,28 +37,28 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+    const swiperConfig = {
+        slidesPerView: 1, 
+        spaceBetween: 0,
+        loop: true, 
+        observer: true, 
+        observeParents: true,
+        
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    };
+
+    // Inicialización del Apartamento MAR
+   
+    var swiperMar = new Swiper("#swiper-mar", swiperConfig);
+
+    // Inicialización del Apartamento ARENA 
+     var swiperArena = new Swiper("#swiper-arena", swiperConfig);
 });
 
-//depto 1 y 2
-const swiper = new Swiper('.mySwiper', {
-  effect: 'coverflow',
-  grabCursor: true,
-  centeredSlides: true,
-  slidesPerView: 'auto',
-  loop: true,
-  coverflowEffect: {
-    rotate: 0,
-    stretch: 0,
-    depth: 100,
-    modifier: 1.5,
-    slideShadows: false,
-  },
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-  },
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-});
