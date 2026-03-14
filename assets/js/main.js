@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Inicializar AOS
+    AOS.init({
+        once: true,
+        offset: 50,
+        duration: 800,
+        easing: 'ease-in-out',
+    });
+
     // 1. Funcionalidad de Acordeón para la página de FAQ
 
     const accordionHeaders = document.querySelectorAll('.accordion-header');

@@ -42,10 +42,12 @@ body {
     left: 0;
     right: 0;
     padding: 15px 30px;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente oscuro */
+    background-color: rgba(0, 0, 0, 0.4); /* Fondo semitransparente más suave */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     z-index: 20; /* Asegura que esté por encima de la capa de fondo del hero */
     display: flex;
-    justify-content: center; /
+    justify-content: center; /* Centrar menú */
 }
 
 
@@ -151,7 +153,8 @@ body {
 
 .cta-button:hover {
     background-color: #d8c393; 
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 60, 95, 0.2);
 }
 
 /* --- WHY CHOOSE US  --- */
@@ -175,8 +178,9 @@ body {
 
 .card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 8px 20px rgba(0, 60, 95, 0.2);
-    background-color: #d8c393;
+    box-shadow: 0 15px 30px rgba(0, 60, 95, 0.15);
+    background-color: var(--white);
+    border: 1px solid var(--soft-gold);
 }
 
 .card .icon {
@@ -588,6 +592,7 @@ body .depto1 {
     flex-direction: column;
     justify-content: center; 
     text-align: left;
+    border-radius: 12px;
 }
 
 .grid-item.desc-box h3 {
@@ -627,6 +632,7 @@ body .depto1 {
 .carousel-box {
     height: 400px; 
     overflow: hidden; 
+    border-radius: 12px;
 }
 
 .swiper {
@@ -854,6 +860,7 @@ h1 {
     .depto-grid {
         grid-template-columns: 1fr; /* Una sola columna al 100% */
         column-gap: 0;
+        row-gap: 20px;
         grid-template-rows: auto;
         box-shadow: none;
     }
