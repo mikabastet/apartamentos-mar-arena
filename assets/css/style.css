@@ -28,6 +28,14 @@ body {
     text-align: center;
     
 }
+html, body {
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+iframe {
+    max-width: 100%;
+}
 
 /* Tipografías específicas */
 .serif {
@@ -97,7 +105,7 @@ body {
 .bg-dark-blue { background-color: var(--dark-blue); color: var(--white); }
 .color-dark-blue { color: var(--dark-blue); }
 
-/* --- HERO SECTION --- */
+/* --- HERO SECTION --- 
 .hero-section {
     height: 100vh;
     background: url('/assets/img/genericas/satelitar_mar.jpg') center center / cover no-repeat;
@@ -137,7 +145,149 @@ body {
     margin-bottom: 30px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
+*/
+.hero {
+    --sand: #d8c3a0;
+    --ink: #0b1c2c;
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    background:
+        linear-gradient(180deg, rgba(8,20,32,.6) 0%, rgba(8,20,32,.2) 45%, rgba(8,20,32,.85) 100%),
+        url('/assets/img/genericas/hero-mar-monte-hermoso.jpg') center / cover no-repeat;
+}
 
+/* NAV */
+.hero-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem clamp(1.2rem, 5vw, 4rem);
+}
+.hero-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: .05em;
+}
+.hero-logo em, .hero-content h1 em { font-style: italic; color: var(--sand); }
+.hero-links { display: flex; gap: 2.2rem; }
+.hero-links a {
+    font-family: 'Inter', sans-serif;
+    font-size: .72rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.85);
+    text-decoration: none;
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+    transition: color .3s, border-color .3s;
+}
+.hero-links a:hover { color: #fff; border-color: var(--sand); }
+
+/* CONTENIDO */
+.hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    animation: heroRise 1.2s ease-out both;
+}
+.hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(3rem, 9vw, 6.5rem);
+    line-height: 1.05;
+    letter-spacing: .03em;
+    margin: 0;
+}
+.hero-eyebrow {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(.7rem, 1.6vw, .85rem);
+    font-weight: 400;
+    letter-spacing: .4em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 1.4rem;
+}
+.hero-divider {
+    width: 70px;
+    height: 1px;
+    background: var(--sand);
+    margin: 2rem 0 1.5rem;
+}
+.hero-sub {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    letter-spacing: .12em;
+    color: rgba(255,255,255,.9);
+    margin: 0 0 2.5rem;
+}
+
+/* BOTONES */
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.hero-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: .75rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.05rem 2.4rem;
+    border: 1px solid var(--sand);
+    transition: background .3s, color .3s, border-color .3s;
+}
+.hero-btn--solid { background: var(--sand); color: var(--ink); }
+.hero-btn--solid:hover { background: #fff; border-color: #fff; }
+.hero-btn--ghost { color: #fff; border-color: rgba(255,255,255,.55); }
+.hero-btn--ghost:hover { background: rgba(255,255,255,.12); border-color: #fff; }
+
+/* FRANJA INFERIOR */
+.hero-facts {
+    list-style: none;
+    margin: 0;
+    padding: 1.4rem 1rem;
+    display: flex;
+    justify-content: center;
+    gap: clamp(1rem, 4vw, 4rem);
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(255,255,255,.2);
+    background: rgba(8,20,32,.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+.hero-facts li {
+    font-family: 'Inter', sans-serif;
+    font-size: .72rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.85);
+}
+
+@keyframes heroRise {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero-content { animation: none; }
+}
+
+/* MÓVIL */
+@media (max-width: 600px) {
+    .hero-nav { justify-content: center; }
+    .hero-logo { display: none; }
+    .hero-links { gap: 1.4rem; }
+    .hero-btn { width: 100%; text-align: center; }
+    .hero-actions { width: 100%; max-width: 320px; }
+}
 /* Botón CTA (Dorado suave) */
 .cta-button {
     display: inline-block;
