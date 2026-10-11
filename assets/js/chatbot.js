@@ -2,7 +2,7 @@
   'use strict';
 
   var CONFIG = {
-    webhook: '',                 // URL del webhook de n8n. Vacío = solo respuestas locales
+    webhook: 'https://vmi3162910.contaboserver.net/webhook/mar-arena-chat',                 // URL del webhook de n8n. Vacío = solo respuestas locales
     whatsapp: '5492914048082',
     name: 'Perla',
     teaserDelay: 4000
