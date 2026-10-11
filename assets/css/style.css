@@ -886,27 +886,29 @@ h1 {
 
 
 /* Ajuste al footer para centrar el copyright */
-.main-footer {
-    padding: 40px 30px;
-}
-
-
-
-.footer-section h4 {
-    color: var(--soft-gold);
-    font-size: 1.3rem;
-    margin-bottom: 15px;
-}
-
-.footer-content.centered-copyright {
+.footer-legal {
     display: flex;
-    justify-content: center; /* Centra la sección Legal */
-    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .4rem 1.4rem;
+    margin: .8rem 0 1rem;
+}
+.footer-legal a {
+    font-family: 'Inter', sans-serif;
+    font-size: .8rem;
+    letter-spacing: .08em;
+    color: rgba(255, 255, 255, .8);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: color .3s, border-color .3s;
+}
+.footer-legal a:hover,
+.footer-legal a:focus-visible {
+    color: #fff;
+    border-color: #d8c3a0;
 }
 
-.footer-content.centered-copyright .footer-section {
-    text-align: center;
-}
 
 
 /* MEDIA QUERIES - OPTIMIZACIÓN MÓVIL       */
