@@ -135,13 +135,15 @@
         function (err) { if (timer) clearTimeout(timer); throw err; });
   }
 
+  // n8n responde SIEMPRE. Las respuestas locales (KB) solo se usan si el webhook
+  // falla, y para mostrar el botón de WhatsApp en temas de reservas/precios.
   function ask(text, past) {
     var r = local(text);
-    if (r) return Promise.resolve(r);
-    if (!CONFIG.webhook) return Promise.resolve(FALLBACK);
+    var backup = r || OFFLINE;
+    if (!CONFIG.webhook) return Promise.resolve(r || FALLBACK);
     if (location.protocol === 'file:') {
       console.warn('[Perla] Abriste la página como archivo (file://). El webhook solo funciona desde el dominio publicado.');
-      return Promise.resolve(OFFLINE);
+      return Promise.resolve(backup);
     }
     return callWebhook(text, past)
       .catch(function (err) {
@@ -149,7 +151,10 @@
         if (err && err.status && err.status < 500) throw err;
         return new Promise(function (ok) { setTimeout(ok, 1200); }).then(function () { return callWebhook(text, past); });
       })
-      .then(function (x) { return x.a ? x : FALLBACK; })
+      .then(function (x) {
+        if (!x.a) return r || FALLBACK;
+        return { a: x.a, h: x.h || !!(r && r.h) };
+      })
       .catch(function (err) {
         var msg = err && err.message ? err.message : String(err);
         console.warn('[Perla] No se pudo usar el webhook (' + msg + ').' +
@@ -157,7 +162,7 @@
             ? ' Suele ser CORS: el origen ' + location.origin + ' debe estar permitido en el nodo Webhook de n8n (Allowed Origins).'
             : ''));
         track('chatbot_error');
-        return OFFLINE;
+        return backup;
       });
   }
 
