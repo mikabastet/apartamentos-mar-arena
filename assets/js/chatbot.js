@@ -13,6 +13,7 @@
 
   var HANDOFF = 'Para fechas, precios y reservas te paso con la anfitriona. Te responde enseguida por WhatsApp.';
   var FALLBACK = { a: 'Eso prefiero que te lo confirme la anfitriona, así no te digo algo equivocado.', h: true };
+  var OFFLINE = { a: 'Ahora mismo no logro conectarme para responderte eso. La anfitriona te contesta enseguida por WhatsApp.', h: true };
 
   var KB = [
     { k: /(somos|vamos|iremos|seremos|viajamos)\s+(\w+\s+)?([3-9]|tres|cuatro|cinco|seis|siete|ocho)\b|\b([3-9]|tres|cuatro|cinco|seis|siete|ocho)\s+(personas|adultos|amigos|gente)/, a: 'Cada apartamento admite un máximo de 2 personas, así que no podemos alojar a más.', g: 'cap' },
@@ -101,25 +102,63 @@
   var sid = 'pl-' + Math.random().toString(36).slice(2, 10);
   var hist = [];
 
+  // Acepta las formas de respuesta habituales de n8n:
+  // {reply}, {output}, {text}, {message}, [{...}] o texto plano.
+  function parseReply(raw) {
+    var d = raw;
+    try { d = JSON.parse(raw); } catch (e) { /* texto plano */ }
+    if (Array.isArray(d)) d = d[0];
+    if (d && typeof d === 'object' && d.json && typeof d.json === 'object') d = d.json;
+    if (typeof d === 'string') return { a: d.trim(), h: false };
+    if (!d || typeof d !== 'object') return { a: '', h: false };
+    var a = d.reply || d.output || d.text || d.answer || d.message || '';
+    return { a: String(a).trim(), h: d.handoff === true || d.handoff === 'true' };
+  }
+
+  function callWebhook(text, past) {
+    var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 25000) : null;
+    return fetch(CONFIG.webhook, {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'omit',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json, text/plain' },
+      body: JSON.stringify({ message: text, sessionId: sid, history: past || [], page: location.pathname }),
+      signal: ctrl ? ctrl.signal : undefined
+    })
+      .then(function (res) {
+        if (!res.ok) { var e = new Error('HTTP ' + res.status); e.status = res.status; throw e; }
+        return res.text();
+      })
+      .then(parseReply)
+      .then(function (x) { if (timer) clearTimeout(timer); return x; },
+        function (err) { if (timer) clearTimeout(timer); throw err; });
+  }
+
   function ask(text, past) {
     var r = local(text);
     if (r) return Promise.resolve(r);
     if (!CONFIG.webhook) return Promise.resolve(FALLBACK);
-    var ctrl = new AbortController();
-    var timer = setTimeout(function () { ctrl.abort(); }, 20000);
-    return fetch(CONFIG.webhook, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: text, sessionId: sid, history: past || [] }),
-      signal: ctrl.signal
-    })
-      .then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
-      .then(function (d) {
-        var a = String(d.reply || '').trim();
-        return a ? { a: a, h: !!d.handoff } : FALLBACK;
+    if (location.protocol === 'file:') {
+      console.warn('[Perla] Abriste la página como archivo (file://). El webhook solo funciona desde el dominio publicado.');
+      return Promise.resolve(OFFLINE);
+    }
+    return callWebhook(text, past)
+      .catch(function (err) {
+        // Un reintento ante fallos de red o 5xx (p. ej. n8n arrancando); no ante 4xx.
+        if (err && err.status && err.status < 500) throw err;
+        return new Promise(function (ok) { setTimeout(ok, 1200); }).then(function () { return callWebhook(text, past); });
       })
-      .catch(function (err) { console.warn('[Perla] No se pudo usar el webhook:', err && err.message ? err.message : err); return FALLBACK; })
-      .then(function (x) { clearTimeout(timer); return x; });
+      .then(function (x) { return x.a ? x : FALLBACK; })
+      .catch(function (err) {
+        var msg = err && err.message ? err.message : String(err);
+        console.warn('[Perla] No se pudo usar el webhook (' + msg + ').' +
+          (msg === 'Failed to fetch' || msg.indexOf('NetworkError') >= 0
+            ? ' Suele ser CORS: el origen ' + location.origin + ' debe estar permitido en el nodo Webhook de n8n (Allowed Origins).'
+            : ''));
+        track('chatbot_error');
+        return OFFLINE;
+      });
   }
 
   function track(name) {
