@@ -64,9 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Inicialización del Apartamento MAR
    
-    var swiperMar = new Swiper("#swiper-mar", swiperConfig);
-
-    // Inicialización del Apartamento ARENA 
-     var swiperArena = new Swiper("#swiper-arena", swiperConfig);
+    // Solo si Swiper está cargado y el carrusel existe en esta página
+    if (typeof Swiper !== "undefined") {
+        if (document.querySelector("#swiper-mar")) new Swiper("#swiper-mar", swiperConfig);
+        // Inicialización del Apartamento ARENA
+        if (document.querySelector("#swiper-arena")) new Swiper("#swiper-arena", swiperConfig);
+    }
 });
 
